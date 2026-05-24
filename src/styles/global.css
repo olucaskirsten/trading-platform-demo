@@ -130,6 +130,7 @@ a {
 .metric-card,
 .chart-card,
 .trade-ticket,
+.table-card,
 .market-card,
 .watch-card,
 .insight-card,
@@ -715,7 +716,6 @@ th {
 .settings-card,
 .trade-ticket,
 .chart-card,
-.table-card,
 .auth-card {
   position: relative;
   overflow: hidden;
