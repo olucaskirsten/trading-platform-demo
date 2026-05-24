@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { navigation } from "../data/navigation.js";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   const mobileNavigation = useMemo(() => {
     const accountItem = navigation.find((item) => item.path === "/account");
@@ -13,6 +15,11 @@ export default function MobileNavigation() {
 
     return accountItem ? [accountItem, ...otherItems] : navigation;
   }, []);
+
+  function handleLogout() {
+    setIsOpen(false);
+    logout();
+  }
 
   return (
     <div className="mobile-navigation">
@@ -41,6 +48,22 @@ export default function MobileNavigation() {
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.22 }}
           >
+            <div className="mobile-user-card">
+              <div>
+                <strong>{user?.name}</strong>
+                <span>{user?.role}</span>
+              </div>
+
+              <motion.button
+                className="mobile-logout-button"
+                onClick={handleLogout}
+                aria-label="Log out"
+                whileTap={{ scale: 0.92 }}
+              >
+                <LogOut size={18} />
+              </motion.button>
+            </div>
+
             {mobileNavigation.map((item, index) => {
               const Icon = item.icon;
 
