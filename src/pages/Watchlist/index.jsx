@@ -1,5 +1,6 @@
 import "./Watchlist.css";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Bell, Star, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import AnimatedPage from "../../components/AnimatedPage.jsx";
@@ -63,56 +64,59 @@ export default function Watchlist() {
 
       </div>
 
-      <AnimatePresence>
-        {alertModal && (
-          <motion.div
-            className="alert-modal-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setAlertModal(null)}
-          >
+      {createPortal(
+        <AnimatePresence>
+          {alertModal && (
             <motion.div
-              className="alert-modal"
-              initial={{ opacity: 0, y: 24, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 16, scale: 0.96 }}
-              transition={{ duration: 0.24 }}
-              onClick={(event) => event.stopPropagation()}
+              className="alert-modal-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setAlertModal(null)}
             >
-              <button
-                className="alert-modal-close"
-                type="button"
-                onClick={() => setAlertModal(null)}
-                aria-label="Close alert confirmation"
+              <motion.div
+                className="alert-modal"
+                initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 16, scale: 0.96 }}
+                transition={{ duration: 0.24 }}
+                onClick={(event) => event.stopPropagation()}
               >
-                <X size={18} />
-              </button>
+                <button
+                  className="alert-modal-close"
+                  type="button"
+                  onClick={() => setAlertModal(null)}
+                  aria-label="Close alert confirmation"
+                >
+                  <X size={18} />
+                </button>
 
-              <div className="alert-modal-icon">
-                <Bell size={24} />
-              </div>
+                <div className="alert-modal-icon">
+                  <Bell size={24} />
+                </div>
 
-              <span>Alert enabled</span>
+                <span>Alert enabled</span>
 
-              <h2>{alertModal.symbol} notifications are now active.</h2>
+                <h2>{alertModal.symbol} notifications are now active.</h2>
 
-              <p>
-                You will receive an email notification when there is a relevant
-                movement or update related to {alertModal.name}.
-              </p>
+                <p>
+                  You will receive an email notification when there is a relevant
+                  movement or update related to {alertModal.name}.
+                </p>
 
-              <button
-                className="primary-button alert-modal-button"
-                type="button"
-                onClick={() => setAlertModal(null)}
-              >
-                Got it
-              </button>
+                <button
+                  className="primary-button alert-modal-button"
+                  type="button"
+                  onClick={() => setAlertModal(null)}
+                >
+                  Got it
+                </button>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </AnimatedPage>
   );
 }
