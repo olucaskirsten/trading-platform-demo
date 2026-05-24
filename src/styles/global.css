@@ -434,7 +434,7 @@ a {
   -webkit-overflow-scrolling: touch;
 }
 
-table {
+.table-card table {
   width: 100%;
   min-width: 760px;
   border-collapse: collapse;
@@ -728,7 +728,6 @@ th {
 .settings-card::before,
 .trade-ticket::before,
 .chart-card::before,
-.table-card::before,
 .auth-card::before {
   content: "";
   position: absolute;
@@ -746,7 +745,6 @@ th {
 .settings-card:hover::before,
 .trade-ticket:hover::before,
 .chart-card:hover::before,
-.table-card:hover::before,
 .auth-card:hover::before {
   opacity: 1;
 }
@@ -1320,6 +1318,29 @@ select option {
   .table-card {
     position: relative;
     padding-bottom: 18px;
+  }
+
+  .table-card::after {
+    content: "Swipe sideways to view more →";
+    display: block;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    text-align: right;
+  }
+}
+
+@media (max-width: 760px) {
+  .table-card {
+    display: block;
+    max-width: calc(100vw - 36px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    touch-action: pan-x;
+  }
+
+  .table-card table {
+    min-width: 820px;
   }
 
   .table-card::after {
