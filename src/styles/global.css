@@ -426,12 +426,17 @@ a {
 }
 
 .table-card {
+  width: 100%;
+  max-width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
   padding: 12px;
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
   width: 100%;
+  min-width: 760px;
   border-collapse: collapse;
 }
 
@@ -1147,7 +1152,7 @@ select option {
     top: 0;
     z-index: 90;
     display: block;
-    padding: 14px 18px 0;
+    padding: 14px 18px 18px;
     background: rgba(7, 7, 17, 0.76);
     backdrop-filter: blur(20px);
   }
@@ -1310,4 +1315,20 @@ select option {
   color: var(--red);
   border-color: rgba(255, 79, 109, 0.42);
   background: rgba(255, 79, 109, 0.1);
+}
+
+@media (max-width: 760px) {
+  .table-card {
+    position: relative;
+    padding-bottom: 18px;
+  }
+
+  .table-card::after {
+    content: "Swipe sideways to view more →";
+    display: block;
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    text-align: right;
+  }
 }
