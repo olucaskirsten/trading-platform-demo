@@ -99,11 +99,23 @@ export default function Login() {
 
         <motion.button className="primary-button" {...buttonMotion}>Sign in</motion.button>
 
+        <div className="demo-credentials">
+          <span>Demo credentials</span>
+
+          <div>
+            <strong>Email</strong>
+            <code>demo@quantumtrade.dev</code>
+          </div>
+
+          <div>
+            <strong>Password</strong>
+            <code>demo123</code>
+          </div>
+        </div>
+
         <p>
           New here? <Link to="/register">Create a demo account</Link>
         </p>
-
-        <small>Use the demo credentials or any account created in this front-end simulation.</small>
       </motion.form>
     </main>
   );

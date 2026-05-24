@@ -21,6 +21,15 @@ export default function Account() {
     accountNumber: user?.accountNumber || ""
   });
 
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: ""
+  });
+
+  const [passwordMessage, setPasswordMessage] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   function handleChange(field, value) {
     setSaved(false);
     setProfile((current) => ({
@@ -47,6 +56,55 @@ export default function Account() {
     event.preventDefault();
     updateProfile(profile);
     setSaved(true);
+  }
+
+  function handlePasswordSubmit(event) {
+    event.preventDefault();
+    setPasswordMessage("");
+    setPasswordError("");
+
+    if (passwordData.newPassword.length < 6) {
+      setPasswordError("Your new password must have at least 6 characters.");
+      return;
+    }
+
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setPasswordError("The new password confirmation does not match.");
+      return;
+    }
+
+    const storedUsers = JSON.parse(localStorage.getItem("qt_registered_users")) || [];
+
+    const currentUser = storedUsers.find((item) => item.email === user?.email);
+
+    if (!currentUser) {
+      setPasswordError("Password change is available only for locally registered demo accounts.");
+      return;
+    }
+
+    if (currentUser.password !== passwordData.currentPassword) {
+      setPasswordError("The current password is incorrect.");
+      return;
+    }
+
+    const updatedUsers = storedUsers.map((item) =>
+      item.email === user?.email
+        ? {
+          ...item,
+          password: passwordData.newPassword
+        }
+        : item
+    );
+
+    localStorage.setItem("qt_registered_users", JSON.stringify(updatedUsers));
+
+    setPasswordData({
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: ""
+    });
+
+    setPasswordMessage("Password updated successfully.");
   }
 
   return (
@@ -176,6 +234,93 @@ export default function Account() {
               animate={{ opacity: 1, y: 0 }}
             >
               Account details updated successfully.
+            </motion.div>
+          )}
+        </motion.section>
+
+        <motion.section
+          className="account-card account-card-wide"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.22 }}
+        >
+          <h2>Security settings</h2>
+
+          <p className="account-section-description">
+            Update the password used to access this local demo account.
+          </p>
+
+          <div className="account-form-grid">
+            <label>
+              Current password
+              <input
+                type="password"
+                value={passwordData.currentPassword}
+                onChange={(event) =>
+                  setPasswordData({
+                    ...passwordData,
+                    currentPassword: event.target.value
+                  })
+                }
+              />
+            </label>
+
+            <label>
+              New password
+              <input
+                type="password"
+                value={passwordData.newPassword}
+                onChange={(event) =>
+                  setPasswordData({
+                    ...passwordData,
+                    newPassword: event.target.value
+                  })
+                }
+              />
+            </label>
+
+            <label>
+              Confirm new password
+              <input
+                type="password"
+                value={passwordData.confirmPassword}
+                onChange={(event) =>
+                  setPasswordData({
+                    ...passwordData,
+                    confirmPassword: event.target.value
+                  })
+                }
+              />
+            </label>
+          </div>
+
+          <motion.button
+            type="button"
+            className="secondary-button password-save-button"
+            onClick={handlePasswordSubmit}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Update password
+          </motion.button>
+
+          {passwordMessage && (
+            <motion.div
+              className="success-message"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              {passwordMessage}
+            </motion.div>
+          )}
+
+          {passwordError && (
+            <motion.div
+              className="error-message"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              {passwordError}
             </motion.div>
           )}
         </motion.section>
