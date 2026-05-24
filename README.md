@@ -41,7 +41,7 @@ This project was designed specifically for portfolio purposes, showing skills in
 
 ## Important Disclaimer
 
-This is a **simulated trading platform** created only for educational and portfolio purposes.
+This is a **simulated trading platform** created only for portfolio purposes.
 
 It does not:
 
@@ -392,4 +392,4 @@ https://github.com/olucaskirsten
 
 ## License
 
-This project is available for portfolio and educational purposes.
+This project is available for portfolio purposes.
