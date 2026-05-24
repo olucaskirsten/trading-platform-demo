@@ -31,7 +31,8 @@ export const api = {
       body: JSON.stringify(payload)
     }),
 
-  getMarket: (assetId = "nas100") => request(`/api/market?asset=${assetId}`),
+  getMarket: (assetId = "nas100", pairId = "btc", range = "1m") =>
+    request(`/api/market?asset=${assetId}&pair=${pairId}&range=${range}`),
 
   getPortfolio: () => request("/api/portfolio"),
 

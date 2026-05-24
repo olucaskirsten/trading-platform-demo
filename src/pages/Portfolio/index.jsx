@@ -1,11 +1,12 @@
+import "./Portfolio.css";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import AnimatedGrid from "../components/AnimatedGrid.jsx";
-import AnimatedPage from "../components/AnimatedPage.jsx";
-import MetricCard from "../components/MetricCard.jsx";
-import PageHeader from "../components/PageHeader.jsx";
-import { api } from "../services/api.js";
-import { formatCurrency } from "../utils/formatters.js";
+import AnimatedGrid from "../../components/AnimatedGrid.jsx";
+import AnimatedPage from "../../components/AnimatedPage.jsx";
+import MetricCard from "../../components/MetricCard.jsx";
+import PageHeader from "../../components/PageHeader.jsx";
+import { api } from "../../services/api.js";
+import { formatCurrency } from "../../utils/formatters.js";
 
 export default function Portfolio() {
   const [data, setData] = useState(null);

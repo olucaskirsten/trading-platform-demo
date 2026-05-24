@@ -87,7 +87,8 @@ export const marketPairs = [
     name: "US Dollar",
     value: 5.13,
     change: 0.34,
-    type: "Currency"
+    type: "Currency",
+    description: "Benchmark currency used to compare simulated global market values."
   },
   {
     id: "eur",
@@ -95,7 +96,8 @@ export const marketPairs = [
     name: "Euro",
     value: 5.56,
     change: -0.12,
-    type: "Currency"
+    type: "Currency",
+    description: "European currency comparison with simulated BRL conversion."
   },
   {
     id: "btc",
@@ -103,7 +105,8 @@ export const marketPairs = [
     name: "Bitcoin",
     value: 345120,
     change: 2.45,
-    type: "Crypto"
+    type: "Crypto",
+    description: "The largest crypto asset by market recognition in this simulated dashboard."
   },
   {
     id: "eth",
@@ -111,7 +114,8 @@ export const marketPairs = [
     name: "Ethereum",
     value: 18120,
     change: 1.16,
-    type: "Crypto"
+    type: "Crypto",
+    description: "A major crypto network represented with simulated market movement."
   },
   {
     id: "sol",
@@ -119,7 +123,8 @@ export const marketPairs = [
     name: "Solana",
     value: 804.3,
     change: -0.74,
-    type: "Crypto"
+    type: "Crypto",
+    description: "A high-volatility crypto asset for comparison and watchlist behavior."
   },
   {
     id: "bnb",
@@ -127,7 +132,8 @@ export const marketPairs = [
     name: "BNB",
     value: 3182.2,
     change: 0.51,
-    type: "Crypto"
+    type: "Crypto",
+    description: "A large crypto ecosystem token used in this mock market overview."
   }
 ];
 
@@ -201,6 +207,48 @@ export function randomizeMarketPairs() {
       ...item,
       value: Number((item.value * (1 + drift / 1000)).toFixed(item.value < 10 ? 4 : 2)),
       change: Number((item.change + drift / 5).toFixed(2))
+    };
+  });
+}
+
+
+export function buildMarketHistory(pairId = "btc", range = "1m") {
+  const pair = marketPairs.find((item) => item.id === pairId) || marketPairs[2];
+  const settings = {
+    "1d": { points: 32, amplitude: 0.018 },
+    "1w": { points: 42, amplitude: 0.028 },
+    "1m": { points: 48, amplitude: 0.05 },
+    "1y": { points: 60, amplitude: 0.18 }
+  };
+
+  const selected = settings[range] || settings["1m"];
+  const seed = pair.id.split("").reduce((total, letter) => total + letter.charCodeAt(0), 0);
+  const trendBias = pair.change >= 0 ? 1 : -1;
+
+  return Array.from({ length: selected.points }).map((_, index) => {
+    const progress = index / Math.max(selected.points - 1, 1);
+    const cycle = Math.sin(index / 2.8 + seed) * selected.amplitude;
+    const secondCycle = Math.cos(index / 5.1 + seed / 3) * (selected.amplitude * 0.46);
+    const trend = progress * selected.amplitude * trendBias * 0.86;
+    const value = pair.value * (1 + cycle + secondCycle + trend);
+
+    let label = `D${index + 1}`;
+
+    if (range === "1d") {
+      label = `${String(index % 24).padStart(2, "0")}:00`;
+    }
+
+    if (range === "1w") {
+      label = `Day ${index + 1}`;
+    }
+
+    if (range === "1y") {
+      label = `M${index + 1}`;
+    }
+
+    return {
+      time: label,
+      value: Number(value.toFixed(pair.value < 10 ? 4 : 2))
     };
   });
 }

@@ -5,7 +5,8 @@ import {
   History,
   LineChart,
   Radar,
-  ShieldCheck
+  ShieldCheck,
+  UserCircle
 } from "lucide-react";
 
 export const navigation = [
@@ -15,5 +16,6 @@ export const navigation = [
   { label: "Orders", path: "/orders", icon: History },
   { label: "Watchlist", path: "/watchlist", icon: LineChart },
   { label: "Insights", path: "/insights", icon: Radar },
-  { label: "Risk Settings", path: "/risk-settings", icon: ShieldCheck }
+  { label: "Risk Settings", path: "/risk-settings", icon: ShieldCheck },
+  { label: "Account", path: "/account", icon: UserCircle }
 ];

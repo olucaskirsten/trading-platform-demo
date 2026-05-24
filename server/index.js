@@ -5,6 +5,8 @@ import {
   portfolio,
   orders,
   buildSeries,
+  buildMarketHistory,
+  marketPairs,
   randomizeAssets,
   randomizeMarketPairs
 } from "../api/_lib/data.js";
@@ -47,11 +49,17 @@ app.post("/api/register", (req, res) => {
 
 app.get("/api/market", (req, res) => {
   const assetId = req.query.asset || "nas100";
+  const pairId = req.query.pair || "btc";
+  const range = req.query.range || "1m";
+  const pairs = randomizeMarketPairs();
+  const selectedPair = pairs.find((pair) => pair.id === pairId) || pairs[2] || marketPairs[2];
 
   res.json({
     updatedAt: new Date().toISOString(),
     assets: randomizeAssets(),
-    pairs: randomizeMarketPairs(),
+    pairs,
+    selectedPair,
+    marketHistory: buildMarketHistory(pairId, range),
     series: buildSeries(assetId)
   });
 });

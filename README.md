@@ -21,16 +21,18 @@ Password: demo123
 
 ## Main Features
 
-- Simulated login, registration and logout flow
+- Simulated login, registration, account creation success screen and logout flow
 - Protected dashboard routes
 - Live market chart simulation with green/red movement
 - Four simulated trading assets
 - Simulated buy/order ticket
 - Portfolio overview
-- Currency and crypto comparison screen
+- Currency and crypto comparison screen with clickable detail charts
+- Global search dropdown with direct navigation to assets, currencies and crypto panels
 - Watchlist page
 - Trade history page
 - Risk profile/settings page
+- Client account page with editable profile, profile photo and banking details
 - Mock Node.js API layer for local development and Vercel deployment
 - Responsive dark tech UI with purple accents
 - Animated page transitions, staggered cards, hover interactions, glowing background effects and live signal microinteractions
@@ -65,7 +67,7 @@ quantum-trade-simulator/
 │   ├── data/             # Front-end constants
 │   ├── hooks/            # Custom hooks
 │   ├── layouts/          # App layout
-│   ├── pages/            # Route pages
+│   ├── pages/            # Route pages organized by folder, each with index.jsx and page CSS
 │   ├── services/         # API client
 │   ├── styles/           # Global CSS
 │   └── utils/            # Helpers
@@ -126,3 +128,19 @@ Suggested portfolio description:
 ## Important Disclaimer
 
 This project is for educational and portfolio purposes only. All assets, prices, account balances, trades and results are simulated. Nothing in this project should be interpreted as financial advice, investment recommendation, or a real trading service.
+
+
+## Architecture Note
+
+This project uses a professional React/Vite single-page application structure. That means the app has one physical `index.html`, while each screen is separated into its own React route folder:
+
+```txt
+src/pages/Login/index.jsx
+src/pages/Login/Login.css
+src/pages/Markets/index.jsx
+src/pages/Markets/Markets.css
+src/pages/Account/index.jsx
+src/pages/Account/Account.css
+```
+
+This is the standard architecture for modern React projects deployed to Vercel. Separate physical HTML files are more common in static HTML/CSS/JS projects, not in React SPAs.

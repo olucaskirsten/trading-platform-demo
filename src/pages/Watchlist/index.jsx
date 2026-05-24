@@ -1,10 +1,11 @@
+import "./Watchlist.css";
 import { useEffect, useState } from "react";
 import { Bell, Star } from "lucide-react";
 import { motion } from "framer-motion";
-import AnimatedPage from "../components/AnimatedPage.jsx";
-import PageHeader from "../components/PageHeader.jsx";
-import { api } from "../services/api.js";
-import { formatPercent } from "../utils/formatters.js";
+import AnimatedPage from "../../components/AnimatedPage.jsx";
+import PageHeader from "../../components/PageHeader.jsx";
+import { api } from "../../services/api.js";
+import { formatPercent } from "../../utils/formatters.js";
 
 export default function Watchlist() {
   const [assets, setAssets] = useState([]);

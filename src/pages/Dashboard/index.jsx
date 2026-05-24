@@ -1,13 +1,14 @@
+import "./Dashboard.css";
 import { useState } from "react";
-import AnimatedGrid from "../components/AnimatedGrid.jsx";
-import AnimatedPage from "../components/AnimatedPage.jsx";
-import AssetSelector from "../components/AssetSelector.jsx";
-import LiveChart from "../components/LiveChart.jsx";
-import MetricCard from "../components/MetricCard.jsx";
-import PageHeader from "../components/PageHeader.jsx";
-import TradeTicket from "../components/TradeTicket.jsx";
-import { useLiveMarket } from "../hooks/useLiveMarket.js";
-import { formatCurrency } from "../utils/formatters.js";
+import AnimatedGrid from "../../components/AnimatedGrid.jsx";
+import AnimatedPage from "../../components/AnimatedPage.jsx";
+import AssetSelector from "../../components/AssetSelector.jsx";
+import LiveChart from "../../components/LiveChart.jsx";
+import MetricCard from "../../components/MetricCard.jsx";
+import PageHeader from "../../components/PageHeader.jsx";
+import TradeTicket from "../../components/TradeTicket.jsx";
+import { useLiveMarket } from "../../hooks/useLiveMarket.js";
+import { formatCurrency } from "../../utils/formatters.js";
 
 export default function Dashboard() {
   const [selectedAsset, setSelectedAsset] = useState("nas100");

@@ -1,6 +1,7 @@
+import "./RiskSettings.css";
 import { motion } from "framer-motion";
-import AnimatedPage from "../components/AnimatedPage.jsx";
-import PageHeader from "../components/PageHeader.jsx";
+import AnimatedPage from "../../components/AnimatedPage.jsx";
+import PageHeader from "../../components/PageHeader.jsx";
 
 export default function RiskSettings() {
   return (

@@ -2,16 +2,17 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import AppLayout from "./layouts/AppLayout.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import Login from "./pages/Login.jsx";
-import Register from "./pages/Register.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
-import Portfolio from "./pages/Portfolio.jsx";
-import Markets from "./pages/Markets.jsx";
-import Orders from "./pages/Orders.jsx";
-import Watchlist from "./pages/Watchlist.jsx";
-import Insights from "./pages/Insights.jsx";
-import RiskSettings from "./pages/RiskSettings.jsx";
-import NotFound from "./pages/NotFound.jsx";
+import Login from "./pages/Login/index.jsx";
+import Register from "./pages/Register/index.jsx";
+import Dashboard from "./pages/Dashboard/index.jsx";
+import Portfolio from "./pages/Portfolio/index.jsx";
+import Markets from "./pages/Markets/index.jsx";
+import Orders from "./pages/Orders/index.jsx";
+import Watchlist from "./pages/Watchlist/index.jsx";
+import Insights from "./pages/Insights/index.jsx";
+import RiskSettings from "./pages/RiskSettings/index.jsx";
+import NotFound from "./pages/NotFound/index.jsx";
+import Account from "./pages/Account/index.jsx";
 
 export default function App() {
   const location = useLocation();
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/watchlist" element={<Watchlist />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/risk-settings" element={<RiskSettings />} />
+          <Route path="/account" element={<Account />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

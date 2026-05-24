@@ -1,9 +1,10 @@
+import "./Orders.css";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import AnimatedPage from "../components/AnimatedPage.jsx";
-import PageHeader from "../components/PageHeader.jsx";
-import { api } from "../services/api.js";
-import { formatCurrency } from "../utils/formatters.js";
+import AnimatedPage from "../../components/AnimatedPage.jsx";
+import PageHeader from "../../components/PageHeader.jsx";
+import { api } from "../../services/api.js";
+import { formatCurrency } from "../../utils/formatters.js";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);

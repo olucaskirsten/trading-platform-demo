@@ -1,16 +1,17 @@
+import "./Login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Activity } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAuth } from "../context/AuthContext.jsx";
-import { buttonMotion } from "../utils/animations.js";
+import { useAuth } from "../../context/AuthContext.jsx";
+import { buttonMotion } from "../../utils/animations.js";
 
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [form, setForm] = useState({
-    email: "demo@quantumtrade.dev",
-    password: "demo123"
+    email: "",
+    password: ""
   });
   const [error, setError] = useState("");
 
@@ -102,7 +103,7 @@ export default function Login() {
           New here? <Link to="/register">Create a demo account</Link>
         </p>
 
-        <small>Demo credentials: demo@quantumtrade.dev / demo123</small>
+        <small>Use the demo credentials or any account created in this front-end simulation.</small>
       </motion.form>
     </main>
   );

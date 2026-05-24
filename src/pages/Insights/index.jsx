@@ -1,9 +1,10 @@
+import "./Insights.css";
 import { Brain, Gauge, RadioTower } from "lucide-react";
 import { motion } from "framer-motion";
-import AnimatedGrid from "../components/AnimatedGrid.jsx";
-import AnimatedPage from "../components/AnimatedPage.jsx";
-import PageHeader from "../components/PageHeader.jsx";
-import { cardReveal, softPop } from "../utils/animations.js";
+import AnimatedGrid from "../../components/AnimatedGrid.jsx";
+import AnimatedPage from "../../components/AnimatedPage.jsx";
+import PageHeader from "../../components/PageHeader.jsx";
+import { cardReveal, softPop } from "../../utils/animations.js";
 
 const insights = [
   {
